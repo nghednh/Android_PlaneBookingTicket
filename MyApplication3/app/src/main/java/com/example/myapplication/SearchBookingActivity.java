@@ -41,7 +41,7 @@ public class SearchBookingActivity extends AppCompatActivity {
 
         textAvailableFlights = findViewById(R.id.text_available_flights);
         listFlights = findViewById(R.id.list_flights);
-        ImageButton buttonBack = findViewById(R.id.button_back); // Find the back button
+        ImageButton buttonBack = findViewById(R.id.button_back);
 
         // Initialize date buttons
         dateButtons[0] = findViewById(R.id.button1);
@@ -68,7 +68,7 @@ public class SearchBookingActivity extends AppCompatActivity {
         fromCity = intent.getStringExtra("fromCity");
         toCity = intent.getStringExtra("toCity");
         departureDate = intent.getStringExtra("departureDate");
-        flightClass = intent.getStringExtra("isEconomy"); // Retrieve flight class
+        flightClass = intent.getStringExtra("isEconomy");
 
         // Get flights that match all criteria
         flightList = FlightDataGenerator.getFlightsByCriteria(fromCity, toCity, departureDate, flightClass);
@@ -77,28 +77,30 @@ public class SearchBookingActivity extends AppCompatActivity {
 
         flightAdapter = new FlightAdapter(this, flightList);
         listFlights.setAdapter(flightAdapter);
-        Log.d("SearchBookingActivity", "Adapter set on listFlights with " + flightList.size() + " items");
-
-        listFlights.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Log the click event
-                Log.d("SearchBookingActivity", "Item clicked: " + position);
-
-                // Get the selected flight
-                selectedFlight = flightList.get(position);
-
-                // Launch SelectSeatActivity
-                Intent intent = new Intent(SearchBookingActivity.this, SelectSeatActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // Get week dates
         String[] weekDates = DateUtils.getWeekDates(departureDate);
 
         // Set dates on buttons and initial selection
         setDateButtons(weekDates);
+
+        // Set item click listener for the ListView
+        listFlights.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Flight selectedFlight = flightList.get(position);
+
+                Intent intent = new Intent(SearchBookingActivity.this, SelectSeatActivity.class);
+                intent.putExtra("fromCity", fromCity);
+                intent.putExtra("toCity", toCity);
+                intent.putExtra("flightNumber", selectedFlight.getFlightNumber());
+                intent.putExtra("departureDate", selectedFlight.getDepartureDate());
+                intent.putExtra("departureTime", selectedFlight.getDepartureTime());
+                intent.putExtra("numberOfPassengers", getIntent().getIntExtra("numberOfPassengers", 1)); // Assuming number of passengers is passed from the previous activity
+                intent.putExtra("flightClass", flightClass);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setDateButtons(String[] weekDates) {
@@ -128,9 +130,11 @@ public class SearchBookingActivity extends AppCompatActivity {
             }
         }
         String selectedDate;
-        if (index!=0){
+        if (index != 0) {
             selectedDate = DateUtils.getNextDate(departureDate, index);
-        } else selectedDate = departureDate;
+        } else {
+            selectedDate = departureDate;
+        }
         Log.d("SearchBookingActivity", "Selected date: " + selectedDate);
 
         // Get updated flights based on the selected date
@@ -139,9 +143,7 @@ public class SearchBookingActivity extends AppCompatActivity {
         // Update the text view with the number of available flights
         textAvailableFlights.setText(updatedFlights.size() + " flights available");
 
-        // Clear the existing data in the adapter and add the updated data
-        flightAdapter.clear();
-        flightAdapter.addAll(updatedFlights);
-        flightAdapter.notifyDataSetChanged();
+        // Update the adapter with new flights
+        flightAdapter.updateFlights(updatedFlights);
     }
 }

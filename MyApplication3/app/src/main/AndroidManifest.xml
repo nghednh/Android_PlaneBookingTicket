@@ -33,8 +33,13 @@
             android:exported="true">
             <!-- Add intent filters if needed -->
         </activity>
-        <activity android:name=".SelectSeatActivity"></activity>
 
+        <!-- Declare SelectSeatActivity -->
+        <activity
+            android:name=".SelectSeatActivity"
+            android:exported="true">
+            <!-- Add intent filters if needed -->
+        </activity>
 
     </application>
 

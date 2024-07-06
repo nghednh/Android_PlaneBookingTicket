@@ -103,7 +103,6 @@
             android:padding="10dp" />
 
     </LinearLayout>
-
     <!-- Available Flights Text -->
     <LinearLayout
         android:layout_width="match_parent"

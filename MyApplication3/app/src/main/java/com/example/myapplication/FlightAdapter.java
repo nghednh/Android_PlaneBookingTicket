@@ -11,13 +11,11 @@ import java.util.List;
 
 public class FlightAdapter extends ArrayAdapter<Flight> {
 
-    private List<Flight> flights;
     private LayoutInflater inflater;
 
     public FlightAdapter(Context context, List<Flight> flights) {
         super(context, 0, flights);
-        this.flights = flights;
-        this.inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -48,8 +46,8 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
     }
 
     public void updateFlights(List<Flight> newFlights) {
-        flights.clear();
-        flights.addAll(newFlights);
+        clear();
+        addAll(newFlights);
         notifyDataSetChanged();
     }
 }

@@ -129,7 +129,7 @@ public class TransportActivity extends AppCompatActivity {
             intent.putExtra("toCity", toCity);
             intent.putExtra("departureDate", departureDate);
             intent.putExtra("returnDate", returnDate);
-            intent.putExtra("passengerCount", passengerCount);
+            intent.putExtra("numberOfPassengers", passengerCount);
             intent.putExtra("childrenCount", childrenCount);
             intent.putExtra("petCount", petCount);
             intent.putExtra("luggageCount", luggageCount);

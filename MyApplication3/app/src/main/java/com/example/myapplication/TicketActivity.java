@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SelectSeatActivity extends AppCompatActivity {
+public class TicketActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_seat);
+        setContentView(R.layout.activity_ticket);
 
         Intent intent = getIntent();
         String fromCity = intent.getStringExtra("fromCity");

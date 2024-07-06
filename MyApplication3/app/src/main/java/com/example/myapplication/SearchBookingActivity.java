@@ -3,7 +3,9 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -29,6 +31,8 @@ public class SearchBookingActivity extends AppCompatActivity {
     private String toCity;
     private String departureDate;
     private String flightClass;
+
+    private static Flight selectedFlight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class SearchBookingActivity extends AppCompatActivity {
         toCity = intent.getStringExtra("toCity");
         departureDate = intent.getStringExtra("departureDate");
         flightClass = intent.getStringExtra("isEconomy"); // Retrieve flight class
+
         // Get flights that match all criteria
         flightList = FlightDataGenerator.getFlightsByCriteria(fromCity, toCity, departureDate, flightClass);
 
@@ -72,6 +77,22 @@ public class SearchBookingActivity extends AppCompatActivity {
 
         flightAdapter = new FlightAdapter(this, flightList);
         listFlights.setAdapter(flightAdapter);
+        Log.d("SearchBookingActivity", "Adapter set on listFlights with " + flightList.size() + " items");
+
+        listFlights.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Log the click event
+                Log.d("SearchBookingActivity", "Item clicked: " + position);
+
+                // Get the selected flight
+                selectedFlight = flightList.get(position);
+
+                // Launch SelectSeatActivity
+                Intent intent = new Intent(SearchBookingActivity.this, SelectSeatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Get week dates
         String[] weekDates = DateUtils.getWeekDates(departureDate);
@@ -88,7 +109,6 @@ public class SearchBookingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     selectButton((int) v.getTag());
-
                 }
             });
         }
@@ -107,13 +127,21 @@ public class SearchBookingActivity extends AppCompatActivity {
                 dateButtons[i].setTextColor(ContextCompat.getColor(this, R.color.black));
             }
         }
-        String selectedDate = getNextDate(departureDate, index);
+        String selectedDate;
+        if (index!=0){
+            selectedDate = DateUtils.getNextDate(departureDate, index);
+        } else selectedDate = departureDate;
+        Log.d("SearchBookingActivity", "Selected date: " + selectedDate);
 
-        // Update flights based on selected date
-        flightList = FlightDataGenerator.getFlightsByCriteria(fromCity, toCity, selectedDate, flightClass);
-        textAvailableFlights.setText(flightList.size() + " flights available");
+        // Get updated flights based on the selected date
+        List<Flight> updatedFlights = FlightDataGenerator.getFlightsByCriteria(fromCity, toCity, selectedDate, flightClass);
 
-        // Update adapter with new flight list
-        flightAdapter.updateFlights(flightList);
+        // Update the text view with the number of available flights
+        textAvailableFlights.setText(updatedFlights.size() + " flights available");
+
+        // Clear the existing data in the adapter and add the updated data
+        flightAdapter.clear();
+        flightAdapter.addAll(updatedFlights);
+        flightAdapter.notifyDataSetChanged();
     }
 }

@@ -12,10 +12,12 @@ import java.util.List;
 public class FlightAdapter extends ArrayAdapter<Flight> {
 
     private List<Flight> flights;
+    private LayoutInflater inflater;
 
     public FlightAdapter(Context context, List<Flight> flights) {
         super(context, 0, flights);
         this.flights = flights;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -23,7 +25,7 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         Flight flight = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_flight, parent, false);
+            convertView = inflater.inflate(R.layout.item_flight, parent, false);
         }
 
         TextView textFromCity = convertView.findViewById(R.id.text_from_city);
@@ -33,19 +35,21 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         TextView textPrice = convertView.findViewById(R.id.text_price);
         TextView textFlightNumber = convertView.findViewById(R.id.text_flight_number);
 
-        textFromCity.setText(flight.getFromCity());
-        textToCity.setText(flight.getToCity());
-        textDate.setText(flight.getDepartureDate());
-        textDepartureTime.setText(flight.getDepartureTime());
-        textPrice.setText(flight.getPrice());
-        textFlightNumber.setText(flight.getFlightNumber());
+        if (flight != null) {
+            textFromCity.setText(flight.getFromCity());
+            textToCity.setText(flight.getToCity());
+            textDate.setText(flight.getDepartureDate());
+            textDepartureTime.setText(flight.getDepartureTime());
+            textPrice.setText(flight.getPrice());
+            textFlightNumber.setText(flight.getFlightNumber());
+        }
 
         return convertView;
     }
 
-    public void updateFlights(List<Flight> flights) {
-        this.flights.clear();
-        this.flights.addAll(flights);
+    public void updateFlights(List<Flight> newFlights) {
+        flights.clear();
+        flights.addAll(newFlights);
         notifyDataSetChanged();
     }
 }

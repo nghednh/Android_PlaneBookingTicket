@@ -31,7 +31,7 @@ public class DateUtils {
         return weekDates;
     }
     public static String getNextDate(String dateStr, int i) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         Calendar calendar = Calendar.getInstance();
 
         try {

@@ -16,9 +16,27 @@ public class FlightDataGenerator {
 
         // Generate sample data
         flights.add(new Flight("New York", "Los Angeles", "10/7/2024", "15:00",
-                "10/7/2024", "17:00", "$250.00", "NY-LA-1", "Economy"));
+                "10/7/2024", "17:00", "$251.00", "NY-LA-1", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "10/7/2024", "15:00",
+                "10/7/2024", "17:00", "$1001.00", "NY-LA-2", "Business"));
+        flights.add(new Flight("New York", "Los Angeles", "10/7/2024", "16:00",
+                "10/7/2024", "18:00", "$2001.00", "NY-LA-3", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "10/7/2024", "17:00",
+                "10/7/2024", "19:00", "$2003.00", "NY-LA-9", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "10/7/2024", "18:00",
+                "10/7/2024", "20:00", "$254.00", "NY-LA-10", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "11/7/2024", "15:00",
+                "11/7/2024", "17:00", "$252.00", "NY-LA-4", "Business"));
+        flights.add(new Flight("New York", "Los Angeles", "11/7/2024", "15:00",
+                "11/7/2024", "17:00", "$1002.00", "NY-LA-5", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "12/7/2024", "15:00",
+                "12/7/2024", "17:00", "$2002.00", "NY-LA-6", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "13/7/2024", "15:00",
+                "13/7/2024", "17:00", "$253.00", "NY-LA-7", "Economy"));
+        flights.add(new Flight("New York", "Los Angeles", "14/7/2024", "15:00",
+                "14/7/2024", "17:00", "$1003.00", "NY-LA-8", "Economy"));
         flights.add(new Flight("San Francisco", "Chicago", "11/7/2024", "14:00",
-                "11/7/2024", "16:00", "$300.00", "SF-CHI-1", "Business"));
+                "10/7/2024", "16:00", "$300.00", "SF-CHI-1", "Business"));
         flights.add(new Flight("London", "Paris", "12/7/2024", "16:00",
                 "12/7/2024", "18:00", "$150.00", "LDN-PAR-1", "Economy"));
         flights.add(new Flight("New York", "Chicago", "13/7/2024", "10:00",

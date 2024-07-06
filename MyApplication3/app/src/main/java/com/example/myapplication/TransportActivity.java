@@ -133,7 +133,8 @@ public class TransportActivity extends AppCompatActivity {
             intent.putExtra("childrenCount", childrenCount);
             intent.putExtra("petCount", petCount);
             intent.putExtra("luggageCount", luggageCount);
-            intent.putExtra("isEconomy", isEconomy);
+            if(isEconomy) intent.putExtra("isEconomy", "Economy");
+            else intent.putExtra("isEconomy", "Business");
             intent.putExtra("transportMode", transportMode);
 
             // Start the activity

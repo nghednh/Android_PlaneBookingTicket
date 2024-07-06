@@ -3,5 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="buttonDefaultBackground">#FFFFFF</color>
+    <color name="selectedButtonBackground">#FFC107</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="your_default_color">#FF0000</color> <!-- Example color -->
+    <color name="your_selected_color">#00FF00</color> <!-- Example color -->
 </resources>

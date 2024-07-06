@@ -177,7 +177,7 @@
     </RadioGroup>
 
     <!-- Search Button -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

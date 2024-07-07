@@ -62,8 +62,8 @@
 
             <ImageButton
                 android:id="@+id/ivTrips"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_trips"
                 android:contentDescription="Trips"/>
 
@@ -87,10 +87,10 @@
 
             <ImageButton
                 android:id="@+id/ivHotel"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_hotel"
-                android:contentDescription="Hotel"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="Hotel"
+                android:src="@drawable/ic_hotel" />
 
             <TextView
                 android:id="@+id/tvHotel"
@@ -112,8 +112,8 @@
 
             <ImageButton
                 android:id="@+id/ivTransport"
-                android:layout_width="49dp"
-                android:layout_height="48dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_transport"
                 android:contentDescription="Transport"/>
 
@@ -137,8 +137,8 @@
 
             <ImageButton
                 android:id="@+id/ivEvents"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_events"
                 android:contentDescription="Events"/>
 

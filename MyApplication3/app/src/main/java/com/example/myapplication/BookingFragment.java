@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment;
 
 public class BookingFragment extends Fragment {
 
-    private int[] images = {R.drawable.trips, R.drawable.transport, R.drawable.events, R.drawable.hotel};
-    private String[] texts = {"Trips", "Transport", "Events", "Hotels"};
+    private int[] images = {R.drawable.hotel, R.drawable.transport, R.drawable.events, R.drawable.trips};
+    private String[] texts = {"Hotels", "Transport", "Events", "Trips"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

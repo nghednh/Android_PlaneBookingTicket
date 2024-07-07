@@ -4,19 +4,21 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class SearchBookingActivity extends AppCompatActivity {
+
+    private static final int REQUEST_FILTER = 1;
 
     private TextView textAvailableFlights;
     private ListView listFlights;
@@ -32,8 +34,6 @@ public class SearchBookingActivity extends AppCompatActivity {
     private String departureDate;
     private String flightClass;
 
-    private static Flight selectedFlight;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class SearchBookingActivity extends AppCompatActivity {
         textAvailableFlights = findViewById(R.id.text_available_flights);
         listFlights = findViewById(R.id.list_flights);
         ImageButton buttonBack = findViewById(R.id.button_back);
+        ImageButton buttonFilter = findViewById(R.id.button_filter);
 
         // Initialize date buttons
         dateButtons[0] = findViewById(R.id.button1);
@@ -57,13 +58,15 @@ public class SearchBookingActivity extends AppCompatActivity {
         selectedBackground = ContextCompat.getDrawable(this, R.drawable.button_background_selected);
 
         // Set onClickListener for the back button
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
+        buttonBack.setOnClickListener(v -> onBackPressed());
+
+        // Set onClickListener for the filter button
+        buttonFilter.setOnClickListener(v -> {
+            Intent filterIntent = new Intent(SearchBookingActivity.this, FilterActivity.class);
+            startActivityForResult(filterIntent, REQUEST_FILTER);
         });
 
+        // Get intent data
         Intent intent = getIntent();
         fromCity = intent.getStringExtra("fromCity");
         toCity = intent.getStringExtra("toCity");
@@ -85,21 +88,19 @@ public class SearchBookingActivity extends AppCompatActivity {
         setDateButtons(weekDates);
 
         // Set item click listener for the ListView
-        listFlights.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Flight selectedFlight = flightList.get(position);
+        listFlights.setOnItemClickListener((parent, view, position, id) -> {
+            Flight selectedFlight = flightList.get(position);
 
-                Intent intent = new Intent(SearchBookingActivity.this, SelectSeatActivity.class);
-                intent.putExtra("fromCity", fromCity);
-                intent.putExtra("toCity", toCity);
-                intent.putExtra("flightNumber", selectedFlight.getFlightNumber());
-                intent.putExtra("departureDate", selectedFlight.getDepartureDate());
-                intent.putExtra("departureTime", selectedFlight.getDepartureTime());
-                intent.putExtra("numberOfPassengers", getIntent().getIntExtra("numberOfPassengers", 1)); // Assuming number of passengers is passed from the previous activity
-                intent.putExtra("flightClass", flightClass);
-                startActivity(intent);
-            }
+            Intent detailIntent = new Intent(SearchBookingActivity.this, SelectSeatActivity.class);
+            detailIntent.putExtra("fromCity", fromCity);
+            detailIntent.putExtra("toCity", toCity);
+            detailIntent.putExtra("flightNumber", selectedFlight.getFlightNumber());
+            detailIntent.putExtra("departureDate", selectedFlight.getDepartureDate());
+            detailIntent.putExtra("departureTime", selectedFlight.getDepartureTime());
+            detailIntent.putExtra("numberOfPassengers", getIntent().getIntExtra("numberOfPassengers", 1)); // Assuming number of passengers is passed from the previous activity
+            detailIntent.putExtra("flightClass", flightClass);
+            detailIntent.putExtra("price", selectedFlight.getPrice());
+            startActivity(detailIntent);
         });
     }
 
@@ -107,12 +108,7 @@ public class SearchBookingActivity extends AppCompatActivity {
         for (int i = 0; i < dateButtons.length; i++) {
             dateButtons[i].setText(weekDates[i]);
             dateButtons[i].setTag(i);
-            dateButtons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectButton((int) v.getTag());
-                }
-            });
+            dateButtons[i].setOnClickListener(v -> selectButton((int) v.getTag()));
         }
 
         // Select the first button by default
@@ -145,5 +141,50 @@ public class SearchBookingActivity extends AppCompatActivity {
 
         // Update the adapter with new flights
         flightAdapter.updateFlights(updatedFlights);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_FILTER && resultCode == RESULT_OK && data != null) {
+            String sortCriteria = data.getStringExtra("sortCriteria");
+            Log.d("SearchBookingActivity", "Sort criteria: " + sortCriteria);
+            String departureTime = data.getStringExtra("departureTime");
+            Log.d("SearchBookingActivity", "Departure time: " + departureTime);
+            String arrivalTime = data.getStringExtra("arrivalTime");
+            Log.d("SearchBookingActivity", "Arrival time: " + arrivalTime);
+            double minPrice = data.getDoubleExtra("minPrice", 0);
+            Log.d("SearchBookingActivity", "Min price: " + minPrice);
+            double maxPrice = data.getDoubleExtra("maxPrice", Double.MAX_VALUE);
+            Log.d("SearchBookingActivity", "Max price: " + maxPrice);
+
+            List<Flight> filteredFlights = FlightDataGenerator.getFlightsByCriteria(fromCity, toCity, departureDate, flightClass);
+
+            if (departureTime != null && !departureTime.isEmpty()) {
+                filteredFlights = FlightDataGenerator.getFlightsByDepartureTime(fromCity, toCity, departureDate, departureTime);
+            }
+
+            if (arrivalTime != null && !arrivalTime.isEmpty()) {
+                filteredFlights = FlightDataGenerator.getFlightsByArrivalTime(fromCity, toCity, departureDate, arrivalTime);
+            }
+
+            if (minPrice != 0 || maxPrice != Double.MAX_VALUE) {
+                filteredFlights = FlightDataGenerator.getFlightsByPrice(fromCity, toCity, departureDate, minPrice, maxPrice);
+            }
+
+            // Sort the flights based on the selected criteria
+            if ("Arrival time".equals(sortCriteria)) {
+                filteredFlights.sort(Comparator.comparing(Flight::getArrivalTime));
+            } else if ("Departure time".equals(sortCriteria)) {
+                filteredFlights.sort(Comparator.comparing(Flight::getDepartureTime));
+            } else if ("Price".equals(sortCriteria)) {
+                filteredFlights.sort(Comparator.comparing(f -> Double.parseDouble(f.getPrice().replace("$", ""))));
+            }
+
+            // Update the ListView or RecyclerView with the filteredFlights
+            textAvailableFlights.setText(filteredFlights.size() + " flights available");
+            flightAdapter.updateFlights(filteredFlights);
+        }
     }
 }

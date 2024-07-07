@@ -148,6 +148,50 @@ public class FlightDataGenerator {
 
         return matchingFlights;
     }
+    public static List<Flight> getFlightsByDepartureTime(String fromCity, String toCity, String departureDate, String departureTime) {
+        List<Flight> matchingFlights = new ArrayList<>();
 
+        for (Flight flight : flights) {
+            if (flight.getFromCity().equals(fromCity) &&
+                    flight.getToCity().equals(toCity) &&
+                    flight.getDepartureDate().equals(departureDate) &&
+                    flight.getDepartureTime().equals(departureTime)) {
+                matchingFlights.add(flight);
+            }
+        }
+
+        return matchingFlights;
+    }
+
+    public static List<Flight> getFlightsByArrivalTime(String fromCity, String toCity, String departureDate, String arrivalTime) {
+        List<Flight> matchingFlights = new ArrayList<>();
+
+        for (Flight flight : flights) {
+            if (flight.getFromCity().equals(fromCity) &&
+                    flight.getToCity().equals(toCity) &&
+                    flight.getDepartureDate().equals(departureDate) &&
+                    flight.getArrivalTime().equals(arrivalTime)) {
+                matchingFlights.add(flight);
+            }
+        }
+
+        return matchingFlights;
+    }
+
+    public static List<Flight> getFlightsByPrice(String fromCity, String toCity, String departureDate, double minPrice, double maxPrice) {
+        List<Flight> matchingFlights = new ArrayList<>();
+
+        for (Flight flight : flights) {
+            double flightPrice = Double.parseDouble(flight.getPrice().replace("$", ""));
+            if (flight.getFromCity().equals(fromCity) &&
+                    flight.getToCity().equals(toCity) &&
+                    flight.getDepartureDate().equals(departureDate) &&
+                    flightPrice >= minPrice && flightPrice <= maxPrice) {
+                matchingFlights.add(flight);
+            }
+        }
+
+        return matchingFlights;
+    }
 
 }

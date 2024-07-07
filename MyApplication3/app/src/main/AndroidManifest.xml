@@ -36,10 +36,11 @@
 
         <!-- Declare SelectSeatActivity -->
         <activity
-            android:name=".SelectSeatActivity"
-            android:exported="true">
+            android:name=".SelectSeatActivity">
             <!-- Add intent filters if needed -->
         </activity>
+        <activity android:name=".FilterActivity" />
+
 
     </application>
 

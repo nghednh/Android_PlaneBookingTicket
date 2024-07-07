@@ -17,6 +17,8 @@
         android:contentDescription="@string/back" />
 
     <!-- Title -->
+
+    <!-- Days of the Week Container -->
     <TextView
         android:id="@+id/text_title"
         android:layout_width="wrap_content"
@@ -26,7 +28,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
-    <!-- Days of the Week Container -->
     <LinearLayout
         android:padding="16dp"
         android:layout_width="match_parent"
@@ -128,7 +129,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/filter"
-            android:src="@drawable/ic_filter" />
+            android:src="@drawable/filter1" />
     </LinearLayout>
 
     <ListView

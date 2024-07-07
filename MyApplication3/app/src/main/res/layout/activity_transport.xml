@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.001"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Transport Booking"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:layout_marginStart="8dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -35,8 +35,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:layout_weight="0.2"
+        android:padding="10dp">
 
         <AutoCompleteTextView
             android:id="@+id/editText_from"
@@ -69,66 +69,103 @@
             android:hint="To"
             android:minHeight="48dp" />
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="0.2"
+        >
+        <EditText
+            android:id="@+id/editText_departure"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:hint="Departure"
+            android:focusable="false"
+            android:clickable="true" />
+        <EditText
+            android:id="@+id/editText_return"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:hint="Return"
+            android:focusable="false"
+            android:clickable="true" />
+
+
+    </LinearLayout>
+
+
+
 
     <!-- Date Selection -->
-    <EditText
-        android:id="@+id/editText_departure"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:hint="Departure"
-        android:focusable="false"
-        android:clickable="true" />
 
-    <EditText
-        android:id="@+id/editText_return"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:hint="Return"
-        android:focusable="false"
-        android:clickable="true" />
+        android:text="Passenger Luggage"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.05" />
 
     <!-- Passenger Details -->
-    <EditText
-        android:id="@+id/editText_passenger"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Passenger Count"
-        android:inputType="number"
-        android:layout_weight="1" />
+        android:orientation="horizontal"
+>
 
-    <EditText
-        android:id="@+id/editText_children"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Children Count"
-        android:inputType="number"
-        android:layout_weight="1" />
+        <EditText
+            android:id="@+id/editText_passenger"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Passenger"
+            android:inputType="number"
+            android:layout_weight="1" />
 
-    <EditText
-        android:id="@+id/editText_pet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pet Count"
-        android:inputType="number"
-        android:layout_weight="1" />
+        <EditText
+            android:id="@+id/editText_children"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Children"
+            android:inputType="number"
+            android:layout_weight="1" />
 
-    <EditText
-        android:id="@+id/editText_luggage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Luggage Count"
-        android:inputType="number"
-        android:layout_weight="1" />
+        <EditText
+            android:id="@+id/editText_pet"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Pet"
+            android:inputType="number"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/editText_luggage"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:hint="Luggage"
+            android:inputType="number"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <!-- Class Selection -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Class"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.05" />
     <RadioGroup
         android:id="@+id/radioGroup_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="0.1">
 
         <RadioButton
             android:id="@+id/radioButton_economy"
@@ -144,12 +181,21 @@
     </RadioGroup>
 
     <!-- Transport Mode Selection -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transport"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="0.05" />
     <RadioGroup
         android:id="@+id/radioGroup_transport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1">
+        android:layout_weight="0.1">
 
         <RadioButton
             android:id="@+id/radioButton_plane"
@@ -181,5 +227,6 @@
         android:id="@+id/button_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search" />
+        android:text="Search"
+        android:layout_marginTop="40dp"/>
 </LinearLayout>

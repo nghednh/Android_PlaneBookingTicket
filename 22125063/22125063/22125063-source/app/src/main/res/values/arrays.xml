@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities">
+        <item>New York</item>
+        <item>Los Angeles</item>
+        <item>Chicago</item>
+        <item>Houston</item>
+        <item>Phoenix</item>
+        <item>Philadelphia</item>
+        <item>San Antonio</item>
+        <item>San Diego</item>
+        <item>Dallas</item>
+        <item>San Jose</item>
+        <item>Austin</item>
+        <item>Jacksonville</item>
+        <item>San Francisco</item>
+        <item>Indianapolis</item>
+        <item>Columbus</item>
+        <item>Fort Worth</item>
+        <item>Charlotte</item>
+        <item>Seattle</item>
+        <item>Denver</item>
+        <item>El Paso</item>
+        <item>Detroit</item>
+        <item>Washington</item>
+        <item>Boston</item>
+        <item>Memphis</item>
+        <item>Nashville</item>
+        <item>Portland</item>
+        <item>Oklahoma City</item>
+        <item>Las Vegas</item>
+        <item>Baltimore</item>
+        <item>Louisville</item>
+        <item>Milwaukee</item>
+        <item>Albuquerque</item>
+        <item>Tucson</item>
+        <item>Fresno</item>
+        <item>Sacramento</item>
+        <item>Mesa</item>
+        <item>Kansas City</item>
+        <item>Atlanta</item>
+        <item>Long Beach</item>
+        <item>Colorado Springs</item>
+        <item>Miami</item>
+        <item>Oakland</item>
+        <item>Raleigh</item>
+        <item>Minneapolis</item>
+        <item>Tulsa</item>
+        <item>Cleveland</item>
+        <item>Wichita</item>
+        <item>Arlington</item>
+        <item>New Orleans</item>
+        <item>Bakersfield</item>
+        <item>Tampa</item>
+        <item>Honolulu</item>
+        <item>Anaheim</item>
+        <item>Aurora</item>
+        <item>Santa Ana</item>
+        <item>St. Louis</item>
+        <item>Riverside</item>
+        <item>Corpus Christi</item>
+        <item>Pittsburgh</item>
+        <item>Lexington</item>
+        <item>Stockton</item>
+        <item>Cincinnati</item>
+        <item>Anchorage</item>
+        <item>Toledo</item>
+        <item>St. Paul</item>
+        <item>Newark</item>
+        <item>Greensboro</item>
+        <item>Buffalo</item>
+        <item>Plano</item>
+        <item>Lincoln</item>
+        <item>Henderson</item>
+        <item>Fort Wayne</item>
+        <item>Jersey City</item>
+        <item>St. Petersburg</item>
+        <item>Chula Vista</item>
+        <item>Norfolk</item>
+        <item>Orlando</item>
+        <item>Chandler</item>
+        <item>Laredo</item>
+        <item>Madison</item>
+        <item>Winston-Salem</item>
+        <item>Lubbock</item>
+        <item>Baton Rouge</item>
+        <item>Durham</item>
+        <item>Garland</item>
+        <item>Glendale</item>
+        <item>Reno</item>
+        <item>Hialeah</item>
+        <item>Chesapeake</item>
+        <item>Scottsdale</item>
+        <item>North Las Vegas</item>
+        <item>Irvine</item>
+        <item>Fremont</item>
+        <item>Birmingham</item>
+        <item>San Bernardino</item>
+        <item>Modesto</item>
+    </string-array>
+</resources>
+

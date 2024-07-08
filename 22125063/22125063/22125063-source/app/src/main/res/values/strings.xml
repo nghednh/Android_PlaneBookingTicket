@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="swap_cities">Swap Cities</string>
+    <string name="back_button_description">Back</string>
+    <string name="back">Back</string>
+    <string name="filter">Filter</string>
+    <string-array name="rangeSliderValues">
+        <item>0</item>
+        <item>5000</item>
+    </string-array>
+</resources>
